@@ -12,6 +12,7 @@ var imagemin = require('gulp-imagemin');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
 var babel = require('gulp-babel');
+var Builder = require('systemjs-builder');
 
 var paths = {
     scripts: 'src/scripts/**/*.js',
@@ -24,15 +25,19 @@ var paths = {
 gulp.task('images', function () {
     return gulp.src(paths.images)
         .pipe(imagemin({optimizationLevel: 7}))
-        .pipe(gulp.dest('dist/images/'));
+        .pipe(gulp.dest('./dist/images/'));
 });
 
 gulp.task('scripts', function () {
-    return gulp.src(paths.scripts)
+    gulp.src(['jspm_packages/**/*.js'])
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/jspm_packages/'));
+
+    return gulp.src([paths.scripts])
         .pipe(babel())
         .pipe(uglify())
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest('dist'));
+        //.pipe(concat('main.js'))
+        .pipe(gulp.dest('./dist/scripts/'));
 });
 
 gulp.task('templates', function () {
@@ -90,19 +95,26 @@ gulp.task('watch', function () {
 gulp.task('dev', ['templates', 'styles-dev']);
 
 gulp.task('dist', ['templates', 'styles-dist', 'scripts', 'images'], function() {
-    /*
+    /*var builder = new Builder();
     builder.reset();
-    builder.build('index', {}, 'app/.out/scripts/all.js')
-    .then(function () {
-        console.log('SystemJS Build complete');
-        cb();
-    })
-    .catch(function (err) {
-        console.log('SystemJS Build error');
-        console.log(err.stack);
-        cb();
+    builder.loadConfig('src/scripts/config.js')
+    .then(function() {
+      // additional config can also be set through `builder.config`
+      builder.config({
+          baseURL: 'file:' + process.cwd() + '/src/',
+          separateCSS: true,
+          transpiler: 'babel'
+      });
+
+      builder.buildSFX('~/main', 'dist/scripts/main.js', {sourceMaps: false, minify: true})
+      .then(function () {
+          console.log('SystemJS Build complete');
+      })
+      .catch(function (err) {
+          console.log('SystemJS Build error');
+          console.log(err.stack);
+      });
     });*/
 });
-
 
 gulp.task('default', ['dev']);
