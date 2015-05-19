@@ -1,0 +1,38 @@
+@import "../styles/variables.less";
+@import "../styles/mixins.less";
+
+.footer {
+    nav {
+        padding: 0;
+        text-align: center;
+    }
+
+    ul {
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+
+        li {
+            display: inline-block;
+            font-size: 1.4rem;
+
+            a {
+                display: inline-block;
+                padding: 30px 20px;
+                font-family: 'Montserrat', sans-serif;
+                font-weight: 700;
+                text-transform: uppercase;
+                color: white;
+
+                &:hover {
+                    color: rgb(53, 170, 224);
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+
+    img {
+        margin-top: 15px;
+    }
+}
