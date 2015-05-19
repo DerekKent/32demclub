@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import BaseView from '~/helpers/backbone/base';
 import { template } from './app.hbs';
-System.import('./styles/main.css!', {name: __moduleName});
+System.import('~/app/styles/main.css!');
 
 Backbone.$ = $;
 
@@ -26,12 +26,28 @@ class AppView extends BaseView {
         this.$el.html(this.getTemplate());
 
         System.import('~/app/header/header').then(function (m) {
-            let header = new m.default();
+            // HACK: Uncompiled versions seem to prefer m.default() whereas compiled versions
+            // only work with m(). Unknown why this is the case.
+            let header = null;
+            if (m.default) {
+                header = new m.default();
+            } else {
+                header = new m();
+            }
+            //let header = new m.default();
             view.regions.header.show(header);
         });
 
         System.import('~/app/footer/footer').then(function (m) {
-            let footer = new m.default();
+            // HACK: Uncompiled versions seem to prefer m.default() whereas compiled versions
+            // only work with m(). Unknown why this is the case.
+            let footer = null;
+            if (m.default) {
+                footer = new m.default();
+            } else {
+                footer = new m();
+            }
+            //let footer = new m.default();
             view.regions.footer.show(footer);
         });
     }
@@ -41,7 +57,15 @@ class AppView extends BaseView {
 
         // Lazy-load the page
         System.import(`~/pages/${pageName}/${pageName}`).then(function (m) {
-            let page = new m.default(options);
+            // HACK: Uncompiled versions seem to prefer m.default() whereas compiled versions
+            // only work with m(). Unknown why this is the case.
+            let page = null;
+            if (m.default) {
+                page = new m.default(options);
+            } else {
+                page = new m(options);
+            }
+            //let page = new m.default(options);
             view.regions.main.show(page);
         });
 

@@ -1,6 +1,7 @@
 import BaseView from '~/helpers/backbone/base';
 import { template } from './header.hbs';
-System.import('./header.css!', {name: __moduleName});
+System.import('~/app/header/header.css!');
+//System.import('./footer.css!', {name: __moduleName});
 
 export default class Header extends BaseView {
 
