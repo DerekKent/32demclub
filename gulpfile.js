@@ -3,6 +3,7 @@ var gulp = require('gulp');
 var rename = require("gulp-rename");
 var wrap = require('gulp-wrap');
 var less = require('gulp-less');
+var clip = require('gulp-clip-empty-files');
 var uncss = require('gulp-uncss');
 var handlebars = require('gulp-handlebars');
 var sourcemaps = require('gulp-sourcemaps');
@@ -16,7 +17,6 @@ var paths = {
     styles: 'src/**/*.less',
     templates: 'src/scripts/**/*.hbs',
     partials: 'src/scripts/**/*.part.hbs',
-    compiledTemplates: 'src/scripts/**/*.hbs',
     images: 'src/images/**/*'
 };
 
@@ -66,10 +66,11 @@ gulp.task('templates', function () {
 // TODO: Add sourcemaps to dev version only and uncss production version only
 gulp.task('styles', function () {
     return gulp.src(paths.styles)
+        .pipe(clip())
         .pipe(sourcemaps.init())
         .pipe(less())
-        .pipe(sourcemaps.write())
-        //.pipe(uncss({html: ['src/index.html', paths.compiledTemplates]}))
+        .pipe(uncss({html: ['http://localhost:9912/']}))
+        .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./src/'));
 });
 
