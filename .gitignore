@@ -1,6 +1,6 @@
 /jspm_packages/
 node_modules/
 
-*.css
-*.css.map
-*.hbs.js
+src/**/*.css
+src/**/*.css.map
+src/**/*.hbs.js
