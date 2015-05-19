@@ -69,18 +69,19 @@ gulp.task('styles', function () {
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(sourcemaps.write())
-        //.pipe(uncss({html: [paths.compiledTemplates]}))
+        //.pipe(uncss({html: ['src/index.html', paths.compiledTemplates]}))
         .pipe(gulp.dest('./src/'));
 });
 
 gulp.task('watch', function () {
     gulp.watch(paths.scripts, ['scripts']);
-    gulp.watch(paths.images, ['images']);
     gulp.watch(paths.templates, ['templates']);
     gulp.watch(paths.styles, ['styles']);
 });
 
-gulp.task('dist', ['templates', 'styles', 'scripts'], function() {
+gulp.task('dev', ['templates', 'styles', 'scripts']);
+
+gulp.task('dist', ['dev', 'images'], function() {
     /*
     builder.reset();
     builder.build('index', {}, 'app/.out/scripts/all.js')
@@ -96,4 +97,4 @@ gulp.task('dist', ['templates', 'styles', 'scripts'], function() {
 });
 
 
-gulp.task('default', ['dist']);
+gulp.task('default', ['dev']);
