@@ -5,6 +5,7 @@ var wrap = require('gulp-wrap');
 var less = require('gulp-less');
 var clip = require('gulp-clip-empty-files');
 var uncss = require('gulp-uncss');
+var csso = require('gulp-csso');
 var handlebars = require('gulp-handlebars');
 var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
@@ -63,26 +64,32 @@ gulp.task('templates', function () {
         .pipe(gulp.dest('./src/scripts/'));
 });
 
-// TODO: Add sourcemaps to dev version only and uncss production version only
-gulp.task('styles', function () {
+gulp.task('styles-dev', function () {
     return gulp.src(paths.styles)
         .pipe(clip())
         .pipe(sourcemaps.init())
         .pipe(less())
-        .pipe(uncss({html: ['http://localhost:9912/']}))
         .pipe(sourcemaps.write('./'))
         .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('watch', function () {
-    gulp.watch(paths.scripts, ['scripts']);
-    gulp.watch(paths.templates, ['templates']);
-    gulp.watch(paths.styles, ['styles']);
+gulp.task('styles-dist', function () {
+    return gulp.src(paths.styles)
+        .pipe(clip())
+        .pipe(less())
+        .pipe(uncss({html: ['http://localhost:9912/?_escaped_fragment_=']}))
+        .pipe(csso())
+        .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('dev', ['templates', 'styles', 'scripts']);
+gulp.task('watch', function () {
+    gulp.watch(paths.templates, ['templates']);
+    gulp.watch(paths.styles, ['styles-dev']);
+});
 
-gulp.task('dist', ['dev', 'images'], function() {
+gulp.task('dev', ['templates', 'styles-dev']);
+
+gulp.task('dist', ['templates', 'styles-dist', 'scripts', 'images'], function() {
     /*
     builder.reset();
     builder.build('index', {}, 'app/.out/scripts/all.js')

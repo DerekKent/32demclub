@@ -22,6 +22,7 @@
     "gulp-babel": "~5.1.0",
     "gulp-clip-empty-files": "^0.1.1",
     "gulp-concat": "~2.5.2",
+    "gulp-csso": "^1.0.0",
     "gulp-handlebars": "~4.0.0",
     "gulp-imagemin": "~2.2.1",
     "gulp-less": "~3.0.3",
