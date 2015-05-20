@@ -2,7 +2,7 @@ import $ from 'jquery';
 import Backbone from 'backbone';
 import BaseView from '~/helpers/backbone/base';
 import { template } from './app.hbs';
-System.import('~/app/styles/main.css!');
+//System.import('~/app/styles/main.css!');
 
 Backbone.$ = $;
 
