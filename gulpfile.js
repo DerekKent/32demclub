@@ -7,6 +7,7 @@ var less = require('gulp-less');
 var clip = require('gulp-clip-empty-files');
 var uncss = require('gulp-uncss');
 var csso = require('gulp-csso');
+var htmlmin = require('gulp-htmlmin');
 var handlebars = require('gulp-handlebars');
 var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
@@ -42,6 +43,7 @@ gulp.task('fonts', function () {
 
 gulp.task('html', function () {
     return gulp.src(paths.html)
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('./dist/'));
 });
 
