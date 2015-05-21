@@ -26,33 +26,33 @@ var paths = {
     images: 'src/images/**/*'
 };
 
-gulp.task('clean', function () {
-    return del(['dist']);
+gulp.task('clean', function (cb) {
+    del(['dist'], cb);
 });
 
-gulp.task('images', function () {
+gulp.task('images', ['clean'], function () {
     return gulp.src(paths.images)
         .pipe(imagemin({optimizationLevel: 7}))
         .pipe(gulp.dest('./dist/images/'));
 });
 
-gulp.task('fonts', function () {
+gulp.task('fonts', ['clean'], function () {
     return gulp.src(paths.fonts)
         .pipe(gulp.dest('./dist/fonts/'));
 });
 
-gulp.task('html', function () {
+gulp.task('html', ['clean'], function () {
     return gulp.src(paths.html)
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('text', function () {
+gulp.task('text', ['clean'], function () {
     return gulp.src(paths.text)
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('scripts', function () {
+gulp.task('scripts', ['clean', 'templates'], function () {
     gulp.src(['jspm_packages/**/*.js'])
         .pipe(uglify())
         .pipe(gulp.dest('./dist/jspm_packages/'));
@@ -102,7 +102,7 @@ gulp.task('styles-dev', function () {
         .pipe(gulp.dest('./src/'));
 });
 
-gulp.task('styles-dist', function () {
+gulp.task('styles-dist', ['clean'], function () {
     return gulp.src(paths.styles)
         .pipe(clip())
         .pipe(less())
@@ -118,6 +118,6 @@ gulp.task('watch', ['dev'], function () {
 
 gulp.task('dev', ['templates', 'styles-dev']);
 
-gulp.task('dist', ['clean', 'text', 'fonts', 'html', 'templates', 'styles-dist', 'scripts', 'images']);
+gulp.task('dist', ['text', 'fonts', 'html', 'styles-dist', 'scripts', 'images']);
 
 gulp.task('default', ['dev']);
