@@ -1,6 +1,3 @@
 /jspm_packages/
 node_modules/
-
-src/**/*.css
-src/**/*.css.map
-src/**/*.hbs.js
+/dev/
