@@ -51,7 +51,10 @@ function stylesDev () {
         .pipe(clip())
         .pipe(sourcemaps.init())
         .pipe(less())
-        .pipe(sourcemaps.write('./'))
+        .pipe(sourcemaps.write('.', {
+            includeContent: false,
+            sourceRoot: './'
+        }))
         .pipe(gulp.dest('./dev/'));
 }
 
