@@ -115,19 +115,19 @@ class BaseView extends Backbone.View {
 
     _render () {
         _.each(this.regions, function (region) { region.empty(); });
-        this.renderDom();
+        window.requestAnimationFrame(this.renderDom.bind(this));
     }
 
     render () {
         this.onBeforeRender();
         this._render();
-        this.onRender();
+        window.requestAnimationFrame(this.onRender.bind(this));
         if (this._rendered) {
-            this.onDomRefresh();
+            window.requestAnimationFrame(this.onDomRefresh.bind(this));
         } else {
             this._rendered = true;
         }
-        this.onAfterRender();
+        window.requestAnimationFrame(this.onAfterRender.bind(this));
 
         return this;
     }
