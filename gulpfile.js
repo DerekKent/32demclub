@@ -26,42 +26,19 @@ var paths = {
     images: 'src/images/**/*'
 };
 
-gulp.task('clean', function (cb) {
-    del(['dist'], cb);
-});
+/*
+ * Dev Build Tasks
+ *
+ *
+*/
 
-gulp.task('images', ['clean'], function () {
-    return gulp.src(paths.images)
-        .pipe(imagemin({optimizationLevel: 7}))
-        .pipe(gulp.dest('./dist/images/'));
-});
-
-gulp.task('fonts', ['clean'], function () {
-    return gulp.src(paths.fonts)
-        .pipe(gulp.dest('./dist/fonts/'));
-});
-
-gulp.task('html', ['clean'], function () {
-    return gulp.src(paths.html)
-        .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('text', ['clean'], function () {
-    return gulp.src(paths.text)
-        .pipe(gulp.dest('./dist/'));
-});
-
-gulp.task('scripts', ['clean', 'templates'], function () {
-    gulp.src(['jspm_packages/**/*.js'])
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/jspm_packages/'));
-
-    return gulp.src([paths.scripts])
-        .pipe(babel())
-        .pipe(uglify())
-        //.pipe(concat('main.js'))
-        .pipe(gulp.dest('./dist/scripts/'));
+gulp.task('styles-dev', function () {
+    return gulp.src(paths.styles)
+        .pipe(clip())
+        .pipe(sourcemaps.init())
+        .pipe(less())
+        .pipe(sourcemaps.write('./'))
+        .pipe(gulp.dest('./src/'));
 });
 
 gulp.task('templates', function () {
@@ -93,13 +70,48 @@ gulp.task('templates', function () {
         .pipe(gulp.dest('./src/scripts/'));
 });
 
-gulp.task('styles-dev', function () {
-    return gulp.src(paths.styles)
-        .pipe(clip())
-        .pipe(sourcemaps.init())
-        .pipe(less())
-        .pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./src/'));
+/*
+ * Production Build Tasks
+ *
+ *
+*/
+
+gulp.task('clean', function (cb) {
+    del(['dist'], cb);
+});
+
+gulp.task('fonts', ['clean'], function () {
+    return gulp.src(paths.fonts)
+        .pipe(gulp.dest('./dist/fonts/'));
+});
+
+gulp.task('html', ['clean'], function () {
+    return gulp.src(paths.html)
+        .pipe(htmlmin({collapseWhitespace: true}))
+        .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('text', ['clean'], function () {
+    return gulp.src(paths.text)
+        .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('scripts', ['clean', 'templates'], function () {
+    gulp.src(['jspm_packages/**/*.js'])
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/jspm_packages/'));
+
+    return gulp.src([paths.scripts])
+        .pipe(babel())
+        .pipe(uglify())
+        //.pipe(concat('main.js'))
+        .pipe(gulp.dest('./dist/scripts/'));
+});
+
+gulp.task('images', ['clean'], function () {
+    return gulp.src(paths.images)
+        .pipe(imagemin({optimizationLevel: 7}))
+        .pipe(gulp.dest('./dist/images/'));
 });
 
 gulp.task('styles-dist', ['clean'], function () {
@@ -110,6 +122,12 @@ gulp.task('styles-dist', ['clean'], function () {
         .pipe(csso())
         .pipe(gulp.dest('./dist/'));
 });
+
+/*
+ * Combined Tasks
+ *
+ *
+*/
 
 gulp.task('watch', ['dev'], function () {
     gulp.watch(paths.templates, ['templates']);
