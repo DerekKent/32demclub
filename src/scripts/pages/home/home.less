@@ -1,3 +1,6 @@
+@import "../../app/styles/variables";
+@import "../../app/styles/mixins";
+
 .home-page {
     position: relative;
     z-index: -3;
@@ -35,66 +38,93 @@
         }
     }
 
+    .events {
+        padding: 30px;
+        .flex-display();
+        .align-items(center);
+        .justify-content(space-around);
+        .flex-wrap(wrap);
+        text-align: center;
+
+        .desktop({
+            .justify-content(center);
+            .flex-wrap(nowrap);
+            text-align: left;
+        });
+
+        .event-icon {
+            .flex(0, 0, auto);
+        }
+
+        .event-message {
+            margin-top: 20px;
+
+            .desktop({
+                margin-top: 0;
+            });
+        }
+    }
+
     .info {
         position: relative;
         background-color: rgb(246, 246, 246);
         z-index: -3;
-    }
 
-    .info .box {
-        position: relative;
-        display: inline-block;
-        margin: 20px 40px;
-        padding: 30px;
-        width: 300px;
-        background-color: white;
-        box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
-        text-align: center;
-        z-index: -2;
-        vertical-align: top;
-    }
+        .box {
+            position: relative;
+            display: inline-block;
+            margin: 20px 40px;
+            padding: 30px;
+            width: 300px;
+            background-color: white;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .1);
+            text-align: center;
+            z-index: -2;
+            vertical-align: top;
 
-    .info .box > i {
-        font-size: 10rem;
-        color: #333;
-        transition: color 0.5s ease-in-out;
-    }
+            &:hover > i {
+                color: rgb(227, 24, 24);
+            }
 
-    .info .box:hover > i {
-        color: rgb(227, 24, 24);
-    }
+            > i {
+                font-size: 10rem;
+                color: #333;
+                transition: color 0.5s ease-in-out;
+            }
 
-    .info .box p {
-        margin-top: 15px;
-        font-size: 1.5rem;
-    }
+            p {
+                margin-top: 15px;
+                font-size: 1.5rem;
+            }
 
-    .info .box .btn {
-        position: relative;
-        background-color: rgb(227, 24, 24);
-        border-color: rgb(227, 24, 24);
-        color: white;
-        border-radius: 0;
-        text-transform: uppercase;
-        padding: 10px 25px 10px 30px;
-        margin-top: 30px;
-        line-height: 25px;
-        height: 50px;
-        transition: background 0.5s ease-in-out, border-color 0.5s ease-in-out;
-    }
+            .btn {
+                position: relative;
+                background-color: rgb(227, 24, 24);
+                border-color: rgb(227, 24, 24);
+                color: white;
+                border-radius: 0;
+                text-transform: uppercase;
+                padding: 10px 25px 10px 30px;
+                margin-top: 30px;
+                line-height: 25px;
+                height: 50px;
+                transition: background 0.5s ease-in-out, border-color 0.5s ease-in-out;
 
-    .info .box .btn .text {
-        vertical-align: middle;
-    }
+                &:hover .arrow {
+                    margin-left: 10px;
+                    margin-right: -5px;
+                }
 
-    .info .box .btn .arrow {
-        margin-left: 5px;
-        transition: margin 0.25s linear;
-    }
+                .arrow {
+                    margin-left: 5px;
+                    transition: margin 0.25s linear;
+                }
 
-    .info .box .btn:hover .arrow {
-        margin-left: 10px;
-        margin-right: -5px;
+                .text {
+                    vertical-align: middle;
+                }
+            }
+        }
     }
 
     .info .box .btn .arrow i {
@@ -169,32 +199,32 @@
         padding: 0 20px;
         position: relative;
         text-transform: uppercase;
-    }
 
-    a.button::after {
-        content: '';
-        position: absolute;
-        width: 92%;
-        height: 6px;
-        right: auto;
-        left: 10px;
-        bottom: 1px;
-        background: #f2f2f2;
-        transition: background 0.5s ease-in-out;
-        -webkit-transform: rotate(-2deg);
-        transform: rotate(-2deg);
-        -webkit-transform-origin: right top;
-        transform-origin: right top;
-        z-index: -1;
-        max-width: 200px;
-    }
+        &::after {
+            content: '';
+            position: absolute;
+            width: 92%;
+            height: 6px;
+            right: auto;
+            left: 10px;
+            bottom: 1px;
+            background: #f2f2f2;
+            transition: background 0.5s ease-in-out;
+            -webkit-transform: rotate(-2deg);
+            transform: rotate(-2deg);
+            -webkit-transform-origin: right top;
+            transform-origin: right top;
+            z-index: -1;
+            max-width: 200px;
+        }
 
-    a.button:hover {
-        background: rgb(1, 112, 208);
-    }
+        &:hover {
+            background: rgb(1, 112, 208);
 
-    a.button:hover::after {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
+            &::after {
+                -webkit-transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+        }
     }
 }
