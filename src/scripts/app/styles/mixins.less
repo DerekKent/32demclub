@@ -1,2 +1,9 @@
 @import "./mixins/flexbox";
 @import "./mixins/responsive";
+
+.user-select(@select: none) {
+    -webkit-user-select: @select;
+       -moz-user-select: @select;
+        -ms-user-select: @select;
+            user-select: @select;
+}

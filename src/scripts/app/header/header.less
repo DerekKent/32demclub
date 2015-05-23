@@ -26,6 +26,7 @@
 
         img {
             margin: 8px 120px 8px 0;
+            .user-select(none);
         }
 
         .expand-nav {
@@ -33,8 +34,8 @@
             border: none;
             font-size: 2.5rem;
             color: @blue-32;
-            -webkit-transition: -webkit-transform 0.2s;
-            transition: transform 0.2s;
+            -webkit-transition: -webkit-transform 0.5s;
+            transition: transform 0.5s;
 
             &:hover,
             &:active,
@@ -59,6 +60,7 @@
             display: inline-block;
             .flex-basis(100%);
             text-align: center;
+            .user-select(none);
 
             .desktop({
                 //display: inline-block;
