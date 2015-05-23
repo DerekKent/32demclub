@@ -2,6 +2,7 @@ var path = require('path');
 var gulp = require('gulp');
 var del = require('del');
 var rename = require('gulp-rename');
+var changed = require('gulp-changed');
 var wrap = require('gulp-wrap');
 var less = require('gulp-less');
 var clip = require('gulp-clip-empty-files');
@@ -32,7 +33,7 @@ var paths = {
         text: 'dev/robots.txt',
         scripts: 'dev/scripts/**/*.js',
         styles: 'dev/**/*.less',
-        templates: 'dev/scripts/**/*.hbs',
+        templates: ['dev/scripts/**/*.hbs', '!dev/scripts/**/*.part.hbs'],
         partials: 'dev/scripts/**/*.part.hbs',
         images: 'dev/images/**/*'
     },
@@ -46,8 +47,8 @@ var paths = {
  *
 */
 
-function stylesDev () {
-    return gulp.src(paths.src.styles)
+function stylesDev (src) {
+    return src
         .pipe(clip())
         .pipe(sourcemaps.init())
         .pipe(less())
@@ -58,13 +59,25 @@ function stylesDev () {
         .pipe(gulp.dest('./dev/'));
 }
 
-function templates () {
+function templates (src) {
     var header = 'import Handlebars from \'handlebars\';';
     var tmplHeader = header += 'export var template = Handlebars.template(<%= contents %>)';
-    var partialHeader = header += ';export var partial = Handlebars' +
-        '.registerPartial(<%= pro(file.relative) %>, Handlebars.template(<%= contents %>));'
 
-    gulp.src(paths.src.partials)
+    return src
+        .pipe(handlebars())
+        .pipe(wrap(tmplHeader))
+        .pipe(rename(function (path) {
+            path.extname = '.hbs.js'
+        }))
+        .pipe(gulp.dest('./dev/scripts/'));
+}
+
+function partials (src) {
+    var header = 'import Handlebars from \'handlebars\';';
+    var partialHeader = header += ';export var partial = Handlebars' +
+        '.registerPartial(<%= pro(file.relative) %>, Handlebars.template(<%= contents %>));';
+
+    return src
         .pipe(handlebars())
         .pipe(wrap(partialHeader, {}, {
             imports: {
@@ -77,13 +90,13 @@ function templates () {
             path.extname = '.hbs.js'
         }))
         .pipe(gulp.dest('./dev/scripts/'));
+}
 
-    return gulp.src([paths.src.templates, '!'+paths.src.partials])
-        .pipe(handlebars())
-        .pipe(wrap(tmplHeader))
-        .pipe(rename(function (path) {
-            path.extname = '.hbs.js'
-        }))
+function scriptsDev (src) {
+    return src
+        .pipe(sourcemaps.init())
+        .pipe(babel())
+        .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dev/scripts/'));
 }
 
@@ -93,8 +106,25 @@ function templates () {
  *
 */
 
-gulp.task('styles:watch', stylesDev);
-gulp.task('templates:watch', templates);
+gulp.task('templates:changed', function () {
+    return templates(gulp.src([paths.src.templates])
+        .pipe(changed('./dev/')))
+});
+
+gulp.task('partials:changed', function () {
+    return partials(gulp.src([paths.src.partials])
+        .pipe(changed('./dev/')))
+});
+
+gulp.task('styles:changed', function () {
+    return stylesDev(gulp.src(paths.src.styles)
+        .pipe(changed('./dev/')))
+});
+
+gulp.task('scripts:changed', function () {
+    return scriptsDev(gulp.src([paths.src.scripts, '!dev/scripts/**/*.hbs'])
+        .pipe(changed('./dev/')))
+});
 
 /*
  * Dev Build Tasks
@@ -111,8 +141,21 @@ gulp.task('copy:dev', ['clean:dev'], function () {
         .pipe(gulp.dest('./dev/'));
 });
 
-gulp.task('styles:dev', ['copy:dev'], stylesDev);
-gulp.task('templates:dev', ['copy:dev'], templates);
+gulp.task('styles:dev', ['copy:dev'], function () {
+    return stylesDev(gulp.src(paths.src.styles));
+});
+
+gulp.task('templates:dev', ['copy:dev'], function () {
+    return templates(gulp.src([paths.src.templates]));
+});
+
+gulp.task('partials:dev', ['copy:dev'], function () {
+    return partials(gulp.src([paths.src.partials]));
+});
+
+gulp.task('scripts:dev', ['copy:dev'], function () {
+    return scriptsDev(gulp.src([paths.src.scripts, '!dev/scripts/**/*.hbs']));
+});
 
 /*
  * Production Build Tasks
@@ -140,7 +183,7 @@ gulp.task('text', ['clean:dist', 'copy:dev'], function () {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('scripts', ['clean:dist', 'templates:dev'], function () {
+gulp.task('scripts:dist', ['clean:dist', 'templates:dev', 'partials:dev'], function () {
     gulp.src([paths.jspm])
         .pipe(uglify())
         .pipe(gulp.dest('./dist/jspm_packages/'));
@@ -173,13 +216,15 @@ gulp.task('styles:dist', ['clean:dist', 'styles:dev'], function () {
 */
 
 gulp.task('watch', ['dev'], function () {
-    gulp.watch(paths.src.templates, ['templates:watch']);
-    gulp.watch(paths.src.styles, ['styles:watch']);
+    gulp.watch(paths.src.partials, ['partials:changed']);
+    gulp.watch(paths.src.templates, ['templates:changed']);
+    gulp.watch(paths.src.styles, ['styles:changed']);
+    gulp.watch(paths.src.scripts, ['scripts:changed']);
 });
 
-gulp.task('dev', ['templates:dev', 'styles:dev']);
+gulp.task('dev', ['partials:dev', 'templates:dev', 'styles:dev', 'scripts:dev']);
 
-gulp.task('dist', ['text', 'fonts', 'html', 'styles:dist', 'scripts', 'images']);
+gulp.task('dist', ['text', 'fonts', 'html', 'styles:dist', 'scripts:dist', 'images']);
 gulp.task('build', ['dist']);
 
 gulp.task('default', ['dev']);

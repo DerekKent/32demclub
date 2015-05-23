@@ -1,11 +1,6 @@
 System.config({
   "baseURL": "/",
   "transpiler": "babel",
-  "babelOptions": {
-    "optional": [
-      "runtime"
-    ]
-  },
   "paths": {
     "*": "*.js",
     "~/*": "scripts/*.js",
@@ -41,4 +36,3 @@ System.config({
     }
   }
 });
-
