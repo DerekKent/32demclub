@@ -2,6 +2,11 @@
 @import "../styles/mixins.less";
 
 .header {
+    max-height: 80px;
+    -webkit-transition: max-height 0.8s;
+    transition: max-height 0.8s;
+    overflow: hidden;
+
     nav {
         .flex-display();
         .align-items(center);
@@ -16,20 +21,21 @@
             margin: 8px 120px 8px 0;
         }
 
-        button {
+        .expand-nav {
             background-color: white;
             border: none;
             font-size: 2.5rem;
             color: @blue-32;
-            -webkit-transition: -webkit-transform 0.3s;
-            transition: transform 0.3s;
+            -webkit-transition: -webkit-transform 0.2s;
+            transition: transform 0.2s;
 
             &:hover,
-            &:active {
+            &:active,
+            &.active {
                 color: @blue-32-dark;
             }
 
-            &:active {
+            &.active {
                 -webkit-transform: rotate(-90deg);
                 transform: rotate(-90deg);
             }
@@ -39,15 +45,16 @@
             });
         }
 
-        ul {
+        .menu {
             padding: 0;
             margin: 0;
-            display: none;
+            //display: none;
+            display: inline-block;
             .flex-basis(100%);
             text-align: center;
 
             .desktop({
-                display: inline-block;
+                //display: inline-block;
                 .flex-basis(auto);
             });
 
