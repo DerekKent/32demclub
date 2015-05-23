@@ -1,6 +1,6 @@
 @import "../../../../jspm_packages/github/twbs/bootstrap@3.3.4/less/bootstrap";
 
-@import "./variables.less";
+@import "../styles/mixins.less";
 @import "./glyphs.less";
 
 html {
@@ -8,8 +8,10 @@ html {
 }
 
 body {
+    display: flex;
+    min-height: 100vh;
+    .flex-direction(column);
     font-family: 'Lato', sans-serif;
-    font-size: 0;
 }
 
 body,
@@ -19,6 +21,16 @@ body,
     z-index: -4;
 }
 
+#main {
+    .flex(1);
+}
+
 input {
     border-radius: 0 !important;
+}
+
+button {
+    &:focus {
+        outline: 0;
+    }
 }

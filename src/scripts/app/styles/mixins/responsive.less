@@ -1,0 +1,19 @@
+@import "../variables";
+
+.phone(@rules) {
+    @media (max-width: @screen-phone-max) {
+        @rules();
+    }
+}
+
+.tablet(@rules) {
+    @media (min-width: @screen-tablet-min) and (max-width: @screen-tablet-max) {
+        @rules();
+    }
+}
+
+.desktop(@rules) {
+    @media (min-width: @screen-desktop-min) {
+        @rules();
+    }
+}

@@ -1,38 +1,84 @@
 @import "../styles/variables.less";
+@import "../styles/mixins.less";
 
 .header {
     nav {
-        text-align: center;
+        .flex-display();
+        .align-items(center);
+        .justify-content(space-around);
+        .flex-wrap(wrap);
+
+        .desktop({
+            .justify-content(center);
+        });
 
         img {
             margin: 8px 120px 8px 0;
-            vertical-align: top;
         }
-    }
 
-    ul {
-        padding: 0;
-        margin: 0;
-        display: inline-block;
+        button {
+            background-color: white;
+            border: none;
+            font-size: 2.5rem;
+            color: @blue-32;
+            -webkit-transition: -webkit-transform 0.3s;
+            transition: transform 0.3s;
 
-        li {
-            display: inline-block;
-            font-size: 1.4rem;
+            &:hover,
+            &:active {
+                color: @blue-32-dark;
+            }
 
-            a {
+            &:active {
+                -webkit-transform: rotate(-90deg);
+                transform: rotate(-90deg);
+            }
+
+            .desktop({
+                display: none;
+            });
+        }
+
+        ul {
+            padding: 0;
+            margin: 0;
+            display: none;
+            .flex-basis(100%);
+            text-align: center;
+
+            .desktop({
                 display: inline-block;
-                padding: 30px 20px;
-                font-family: 'Montserrat', sans-serif;
-                font-weight: 700;
-                text-transform: uppercase;
-                color: rgb(53, 170, 224);
+                .flex-basis(auto);
+            });
 
-                &:hover {
-                    color: rgb(1, 112, 208);
-                    text-decoration: none;
+            li {
+                display: inline-block;
+                font-size: 1.4rem;
+
+                .phone({
+                    display: block;
+                });
+
+                a {
+                    display: inline-block;
+                    padding: 30px 20px;
+                    font-family: 'Montserrat', sans-serif;
+                    font-weight: 700;
+                    text-transform: uppercase;
+                    color: @blue-32;
+
+                    .phone({
+                        width: 100%;
+                        padding: 20px 0;
+                    });
+
+                    &:hover {
+                        color: @blue-32-dark;
+                        text-decoration: none;
+                    }
                 }
-          }
-      }
+            }
+        }
     }
 
     .join {
@@ -61,7 +107,7 @@
                 background-color: rgb(227, 24, 24);
                 color: white;
             }
-            
+
             &:focus {
                 outline: 0;
             }
