@@ -49,7 +49,6 @@ var paths = {
 
 function stylesDev (src) {
     return src
-        .pipe(clip())
         .pipe(sourcemaps.init())
         .pipe(less())
         .pipe(sourcemaps.write('.', {
@@ -183,7 +182,7 @@ gulp.task('text', ['clean:dist', 'copy:dev'], function () {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('scripts:dist', ['clean:dist', 'templates:dev', 'partials:dev'], function () {
+gulp.task('scripts:dist', ['clean:dist', 'templates:dev', 'partials:dev', 'scripts:dev'], function () {
     gulp.src([paths.jspm])
         .pipe(uglify())
         .pipe(gulp.dest('./dist/jspm_packages/'));
@@ -200,10 +199,10 @@ gulp.task('images', ['clean:dist', 'copy:dev'], function () {
         .pipe(gulp.dest('./dist/images/'));
 });
 
-gulp.task('styles:dist', ['clean:dist', 'styles:dev'], function () {
+gulp.task('styles:dist', ['clean:dist', 'dev'], function () {
     return gulp.src(paths.dev.styles)
-        .pipe(clip())
         .pipe(less())
+        .pipe(clip())
         .pipe(uncss({html: ['http://localhost:9912/?_escaped_fragment_=']}))
         .pipe(csso())
         .pipe(gulp.dest('./dist/'));
