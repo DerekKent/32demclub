@@ -5,8 +5,6 @@ var rename = require('gulp-rename');
 var changed = require('gulp-changed');
 var wrap = require('gulp-wrap');
 var less = require('gulp-less');
-var clip = require('gulp-clip-empty-files');
-var uncss = require('gulp-uncss');
 var csso = require('gulp-csso');
 var htmlmin = require('gulp-htmlmin');
 var handlebars = require('gulp-handlebars');
@@ -166,44 +164,44 @@ gulp.task('clean:dist', function (cb) {
     del(['dist'], cb);
 });
 
-gulp.task('fonts', ['clean:dist', 'copy:dev'], function () {
-    return gulp.src(paths.dev.fonts)
+gulp.task('fonts', ['clean:dist'], function () {
+    return gulp.src(paths.src.fonts)
         .pipe(gulp.dest('./dist/fonts/'));
 });
 
-gulp.task('html', ['clean:dist', 'copy:dev'], function () {
-    return gulp.src(paths.dev.html)
+gulp.task('html', ['clean:dist'], function () {
+    return gulp.src(paths.src.html)
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('text', ['clean:dist', 'copy:dev'], function () {
-    return gulp.src(paths.dev.text)
+gulp.task('text', ['clean:dist'], function () {
+    return gulp.src(paths.src.text)
         .pipe(gulp.dest('./dist/'));
 });
 
 gulp.task('scripts:dist', ['clean:dist', 'templates:dev', 'partials:dev', 'scripts:dev'], function () {
-    gulp.src([paths.jspm])
-        .pipe(uglify())
-        .pipe(gulp.dest('./dist/jspm_packages/'));
-
-    return gulp.src([paths.dev.scripts])
+    // TODO: Separate into multiple tasks, and pipe everything from src
+    gulp.src([paths.dev.scripts])
         .pipe(babel())
         .pipe(uglify())
         .pipe(gulp.dest('./dist/scripts/'));
+
+    return gulp.src([paths.jspm])
+        // TODO: only uglify and move files that are needed
+        .pipe(uglify())
+        .pipe(gulp.dest('./dist/jspm_packages/'));
 });
 
-gulp.task('images', ['clean:dist', 'copy:dev'], function () {
-    return gulp.src(paths.dev.images)
+gulp.task('images', ['clean:dist'], function () {
+    return gulp.src(paths.src.images)
         .pipe(imagemin({optimizationLevel: 7}))
         .pipe(gulp.dest('./dist/images/'));
 });
 
-gulp.task('styles:dist', ['clean:dist', 'dev'], function () {
-    return gulp.src(paths.dev.styles)
+gulp.task('styles:dist', ['clean:dist'], function () {
+    return gulp.src(paths.src.styles)
         .pipe(less())
-        .pipe(clip())
-        .pipe(uncss({html: ['http://localhost:9912/?_escaped_fragment_=']}))
         .pipe(csso())
         .pipe(gulp.dest('./dist/'));
 });
