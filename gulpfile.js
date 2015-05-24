@@ -47,7 +47,7 @@ var paths = {
 
 function error (e) {
     console.log(e.message);
-    this.end();
+    this.emit('end');
 }
 
 function stylesDev (src) {
