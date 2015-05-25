@@ -2,6 +2,7 @@ var path = require('path');
 var gulp = require('gulp');
 var del = require('del');
 var rename = require('gulp-rename');
+var clip = require('gulp-clip-empty-files');
 var changed = require('gulp-changed');
 var wrap = require('gulp-wrap');
 var less = require('gulp-less');
@@ -214,6 +215,7 @@ gulp.task('styles:dist', ['clean:dist'], function () {
         .pipe(less())
         .on('error', handleError)
         .pipe(csso())
+        .pipe(clip())
         .pipe(gulp.dest('./dist/'));
 });
 
