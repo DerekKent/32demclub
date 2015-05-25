@@ -45,7 +45,7 @@ var paths = {
  *
 */
 
-function error (e) {
+function handleError (e) {
     console.log(e.message);
     this.emit('end');
 }
@@ -54,7 +54,7 @@ function stylesDev (src) {
     return src
         .pipe(sourcemaps.init())
         .pipe(less())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(sourcemaps.write('.', {
             includeContent: false,
             sourceRoot: './'
@@ -68,7 +68,7 @@ function templates (src) {
 
     return src
         .pipe(handlebars())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(wrap(tmplHeader))
         .pipe(rename(function (path) {
             path.extname = '.hbs.js'
@@ -83,7 +83,7 @@ function partials (src) {
 
     return src
         .pipe(handlebars())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(wrap(partialHeader, {}, {
             imports: {
                 pro: function (file) {
@@ -101,7 +101,7 @@ function scriptsDev (src) {
     return src
         .pipe(sourcemaps.init())
         .pipe(babel())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('./dev/scripts/'));
 }
@@ -193,7 +193,7 @@ gulp.task('scripts:dist', ['clean:dist', 'templates:dev', 'partials:dev', 'scrip
     // TODO: Separate into multiple tasks, and pipe everything from src
     gulp.src([paths.dev.scripts])
         .pipe(babel())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(uglify())
         .pipe(gulp.dest('./dist/scripts/'));
 
@@ -212,7 +212,7 @@ gulp.task('images', ['clean:dist'], function () {
 gulp.task('styles:dist', ['clean:dist'], function () {
     return gulp.src(paths.src.styles)
         .pipe(less())
-        .on('error', error)
+        .on('error', handleError)
         .pipe(csso())
         .pipe(gulp.dest('./dist/'));
 });
