@@ -8,8 +8,8 @@ Backbone.$ = $;
 let style = document.createElement('style');
 let head = document.getElementsByTagName('head')[0];
 style.innerHTML = `
-    @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic);
-    @import url(http://fonts.googleapis.com/css?family=Montserrat:700,400);
+    @import url('//fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic');
+    @import url('//fonts.googleapis.com/css?family=Montserrat:700,400');
     @import url(/scripts/app/styles/main.css);
 `;
 head.appendChild(style);
