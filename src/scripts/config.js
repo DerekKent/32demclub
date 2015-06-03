@@ -10,6 +10,61 @@ System.config({
 });
 
 System.config({
+  "depCache": {
+    "~/helpers/backbone/base": [
+      "github:components/jquery@2.1.4",
+      "npm:underscore@1.8.3",
+      "npm:backbone@1.2.0"
+    ],
+    "github:components/jquery@2.1.4": [
+      "github:components/jquery@2.1.4/jquery"
+    ],
+    "npm:underscore@1.8.3": [
+      "npm:underscore@1.8.3/underscore"
+    ],
+    "npm:process@0.10.1": [
+      "npm:process@0.10.1/browser"
+    ],
+    "github:components/handlebars.js@3.0.3": [
+      "github:components/handlebars.js@3.0.3/handlebars"
+    ],
+    "github:jspm/nodelibs-process@0.1.1/index": [
+      "npm:process@0.10.1"
+    ],
+    "~/app/app.hbs": [
+      "github:components/handlebars.js@3.0.3"
+    ],
+    "github:jspm/nodelibs-process@0.1.1": [
+      "github:jspm/nodelibs-process@0.1.1/index"
+    ],
+    "~/app/app": [
+      "github:components/jquery@2.1.4",
+      "npm:backbone@1.2.0",
+      "~/helpers/backbone/base",
+      "~/app/app.hbs"
+    ],
+    "npm:backbone@1.2.0/backbone": [
+      "npm:underscore@1.8.3",
+      "github:components/jquery@2.1.4",
+      "github:jspm/nodelibs-process@0.1.1"
+    ],
+    "~/router": [
+      "npm:backbone@1.2.0",
+      "~/app/app"
+    ],
+    "npm:backbone@1.2.0": [
+      "npm:backbone@1.2.0/backbone"
+    ],
+    "scripts/main": [
+      "github:components/jquery@2.1.4",
+      "npm:backbone@1.2.0",
+      "~/router",
+      "~/app/app"
+    ]
+  }
+});
+
+System.config({
   "map": {
     "babel": "npm:babel-core@5.4.3",
     "babel-runtime": "npm:babel-runtime@5.4.3",

@@ -36,8 +36,8 @@
   },
   "jspm": {
     "directories": {
-      "baseURL": "src",
-      "lib": "src/scripts",
+      "baseURL": "dev",
+      "lib": "dev/scripts",
       "packages": "jspm_packages"
     },
     "configFile": "src/scripts/config.js",
