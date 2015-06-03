@@ -19,7 +19,7 @@
   "dependencies": {},
   "devDependencies": {
     "del": "~1.2.0",
-    "gulp": "~3.8.11",
+    "gulp": "~3.9.0",
     "gulp-babel": "~5.1.0",
     "gulp-changed": "~1.2.1",
     "gulp-clean": "~0.3.1",
