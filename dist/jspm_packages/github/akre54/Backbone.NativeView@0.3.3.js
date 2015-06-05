@@ -1,0 +1,1 @@
+define(["github:akre54/Backbone.NativeView@0.3.3/backbone.nativeview"],function(e){return e});
