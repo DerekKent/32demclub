@@ -6,11 +6,16 @@ export default class Header extends BaseView {
     constructor () {
         super({
             el: '#header',
-            template: template,
 
             events: {
                 'click .expand-nav': 'toggleNavMenu'
             }
+        });
+    }
+
+    initialize () {
+        super.initialize({
+            template: template
         });
     }
 
@@ -21,7 +26,7 @@ export default class Header extends BaseView {
     }
 
     toggleNavMenu (e) {
-        let button = e.currentTarget;
+        let button = e.target;
         let header = this.el.querySelector('.header');
 
         if (header.style.maxHeight !== '80px') {

@@ -62,7 +62,8 @@ class Region {
         this.views = this.views || [];
         this.views.push(view);
         this.el.appendChild(view.el);
-        view.setElement(view.el).render();
+        view._setElement(view.el);
+        view.render();
         view.onShow();
     }
 
@@ -99,13 +100,9 @@ class Regions {
 
 class BaseView extends Backbone.View {
 
-    constructor (options = {}) {
-        super(...arguments);
-
+    initialize (options) {
         this.template = options.template;
         this.regions = new Regions(options.regions, this);
-
-        this.initialize.apply(this, arguments);
     }
 
     renderDom () {
@@ -174,9 +171,7 @@ class BaseView extends Backbone.View {
             region.close();
         });
 
-        this.off(); // Remove all event listeners
-        this.remove();
-        this.unbind();
+        this._removeElement();
         dispose(this);
 
         return this;

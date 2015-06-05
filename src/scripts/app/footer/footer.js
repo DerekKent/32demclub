@@ -5,7 +5,12 @@ export default class Footer extends BaseView {
 
     constructor () {
         super({
-            el: '#footer',
+            el: '#footer'
+        });
+    }
+
+    initialize () {
+        super.initialize({
             template: template
         });
     }

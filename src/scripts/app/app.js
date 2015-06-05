@@ -15,7 +15,12 @@ class AppView extends BaseView {
 
     constructor () {
         super({
-            el: 'body',
+            el: 'body'
+        });
+    }
+
+    initialize () {
+        super.initialize({
             template: template,
             regions: {
                 main: '#main',
@@ -23,9 +28,6 @@ class AppView extends BaseView {
                 footer: '#footer'
             }
         });
-    }
-
-    initialize () {
         let view = this;
 
         this.el.innerHTML = this.getTemplate();
