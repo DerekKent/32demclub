@@ -15,15 +15,15 @@ class App {
             pushState: true
         });
 
-        /*$(document).on('click', 'a[href]:not([data-bypass]):not([href^="#"])', function(e) {
+        document.addEventListener('click', function (e) {
             if (e.metaKey || e.which !== 1) {
                 return;
             }
 
-            let $this = $(this);
-            let href = $this.attr('href');
+            let el = e.target;
+            let href = el.getAttribute('href');
 
-            if (e.isDefaultPrevented() || MAILTO.test(href)) {
+            if (e.defaultPrevented || MAILTO.test(href)) {
                 return;
             }
 
@@ -33,13 +33,13 @@ class App {
                 window.open(href, '_blank');
             } else {
                 let trigger = true;
-                if ($this.data('trigger') === false) {
+                if (el.getAttribute('data-trigger') === false) {
                     trigger = false;
                 }
 
                 router.navigate(href, {trigger: trigger});
             }
-        });*/
+        });
 
     }
 
