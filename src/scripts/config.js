@@ -18,7 +18,8 @@ System.config({
   "depCache": {
     "~/helpers/backbone/base": [
       "npm:underscore@1.8.3",
-      "npm:backbone@1.2.0"
+      "npm:backbone@1.2.0",
+      "github:akre54/Backbone.NativeView@0.3.3"
     ],
     "npm:underscore@1.8.3": [
       "npm:underscore@1.8.3/underscore"
@@ -58,6 +59,12 @@ System.config({
       "npm:backbone@1.2.0",
       "~/router",
       "~/app/app"
+    ],
+    "github:akre54/Backbone.NativeView@0.3.3/backbone.nativeview": [
+      "npm:backbone@1.2.0"
+    ],
+    "github:akre54/Backbone.NativeView@0.3.3": [
+      "github:akre54/Backbone.NativeView@0.3.3/backbone.nativeview"
     ]
   }
 });
