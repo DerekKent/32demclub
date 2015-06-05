@@ -1,4 +1,3 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
 import router from '~/router';
 import appView from '~/app/app';
@@ -16,7 +15,7 @@ class App {
             pushState: true
         });
 
-        $(document).on('click', 'a[href]:not([data-bypass]):not([href^="#"])', function(e) {
+        /*$(document).on('click', 'a[href]:not([data-bypass]):not([href^="#"])', function(e) {
             if (e.metaKey || e.which !== 1) {
                 return;
             }
@@ -40,7 +39,7 @@ class App {
 
                 router.navigate(href, {trigger: trigger});
             }
-        });
+        });*/
 
     }
 

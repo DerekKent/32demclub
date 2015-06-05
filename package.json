@@ -43,8 +43,8 @@
     "configFile": "src/scripts/config.js",
     "dependencies": {
       "backbone": "npm:backbone@^1.2.0",
+      "backbone.nativeview": "github:akre54/Backbone.NativeView@^0.3.3",
       "handlebars": "github:components/handlebars.js@^3.0.3",
-      "jquery": "github:components/jquery@^2.1.4",
       "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {

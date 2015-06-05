@@ -1,9 +1,6 @@
-import $ from 'jquery';
 import Backbone from 'backbone';
 import BaseView from '~/helpers/backbone/base';
 import { template } from './app.hbs';
-
-Backbone.$ = $;
 
 let style = document.createElement('style');
 let head = document.getElementsByTagName('head')[0];
@@ -31,7 +28,7 @@ class AppView extends BaseView {
     initialize () {
         let view = this;
 
-        this.$el.html(this.getTemplate());
+        this.el.innerHTML = this.getTemplate();
 
         System.import('~/app/header/header').then(function (m) {
             // HACK: Uncompiled versions seem to prefer m.default() whereas compiled versions

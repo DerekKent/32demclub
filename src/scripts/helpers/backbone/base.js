@@ -1,6 +1,8 @@
-import $ from 'jquery';
 import _ from 'underscore';
 import Backbone from 'backbone';
+import NativeView from 'backbone.nativeview';
+
+Backbone.View = NativeView;
 
 // requestAnimationFrame Shim for browsers (and PhantomJS)
 (function() {
@@ -31,7 +33,6 @@ import Backbone from 'backbone';
 function dispose(obj) {
     delete obj.parent;
     delete obj.el;
-    delete obj.$el;
     delete obj.regions;
 };
 
@@ -52,14 +53,16 @@ class Region {
     }
 
     appendAs (type, view) {
-        this.$el = this.parent.$el;
-        if (this.el) {
-            this.$el = this.parent.$el.find(this.el);
+        if (typeof this.el === 'string') {
+            this.el = this.parent.el.querySelector(this.el);
         }
+
+        view.el = document.createElement(type);
         view.parent = this.parent;
         this.views = this.views || [];
         this.views.push(view);
-        view.setElement($(`<${type}>`).appendTo(this.$el)).render();
+        this.el.appendChild(view.el);
+        view.setElement(view.el).render();
         view.onShow();
     }
 
@@ -68,10 +71,9 @@ class Region {
             view.close();
         });
 
-        if (this.$el) {
-            this.$el.empty();
+        if (this.el instanceof Element) {
+            this.el.innerHTML = '';
         }
-        this.$el = null;
         this.views = null;
     }
 
@@ -84,13 +86,13 @@ class Region {
 
 class Regions {
 
-    constructor (regions = {}, $context) {
+    constructor (regions = {}, context) {
         _.each(_.keys(regions), function (region) {
-            this[region] = new Region(regions[region], $context);
+            this[region] = new Region(regions[region], context);
         }.bind(this));
 
         // Add a self-referential region to attach views to
-        this.self = new Region(null, $context);
+        this.self = new Region(null, context);
     }
 
 }
@@ -107,8 +109,8 @@ class BaseView extends Backbone.View {
     }
 
     renderDom () {
-        if (this.$el) {
-            this.$el.html(this.getTemplate());
+        if (this.el) {
+            this.el.innerHTML = this.getTemplate();
         }
     }
 
