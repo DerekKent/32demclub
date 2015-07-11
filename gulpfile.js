@@ -75,6 +75,8 @@ function templates (src, end) {
         .pipe(handlebars())
         .on('error', handleError)
         .pipe(wrap(tmplHeader))
+        .pipe(babel())
+        .on('error', handleError)
         .pipe(rename(function (path) {
             path.extname = '.hbs.js'
         }))
@@ -96,6 +98,8 @@ function partials (src, end) {
                 }
             }
         }))
+        .pipe(babel())
+        .on('error', handleError)
         .pipe(rename(function (path) {
             path.extname = '.hbs.js'
         }))
