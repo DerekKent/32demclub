@@ -48,13 +48,7 @@
       "underscore": "npm:underscore@^1.8.3"
     },
     "devDependencies": {},
-    "overrides": {
-      "npm:backbone@1.2.1": {
-        "map": {
-          "jquery": "@empty"
-        }
-      }
-    }
+    "overrides": {}
   },
   "engines": {
     "node": ">=0.12"
