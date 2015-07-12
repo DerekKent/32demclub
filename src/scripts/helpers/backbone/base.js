@@ -102,6 +102,7 @@ class BaseView extends Backbone.View {
 
     initialize (options) {
         this.template = options.template;
+        this.templateHelpers = options.templateHelpers;
         this.regions = new Regions(options.regions, this);
     }
 
