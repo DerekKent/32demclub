@@ -20,10 +20,21 @@ class App {
                 return;
             }
 
-            let el = e.target;
+            var el = e.target;
+
+            // Find the anchor element
+            if (e.path instanceof Array) {
+                for (let i=0, len=e.path.length; i < len; i++) {
+                    if (e.path[i] instanceof HTMLAnchorElement) {
+                        el = e.path[i];
+                        break;
+                    }
+                }
+            }
+
             let href = el.getAttribute('href');
 
-            if (e.defaultPrevented || MAILTO.test(href)) {
+            if (!href || e.defaultPrevented || MAILTO.test(href)) {
                 return;
             }
 
