@@ -159,6 +159,11 @@ small {
     font-size: floor((100% * @font-size-small / @font-size-base));
 }
 
+input::-webkit-input-placeholder { color: rgb(98, 98, 98); }
+input:-ms-input-placeholder { color: rgb(98, 98, 98); }
+input::-moz-placeholder { color: rgb(98, 98, 98); }
+input::placeholder { color: rgb(98, 98, 98); }
+
 .sr-only {
     position: absolute;
     width: 1px;
