@@ -1,0 +1,25 @@
+@import "../../app/styles/variables";
+@import "../../app/styles/mixins";
+
+.news-page {
+    font-size: 1.6em;
+    
+    ul {
+        padding: 0;
+        list-style-type: none;
+    }
+
+    .club-news {
+        padding: 2rem;
+        background-color: rgb(246, 246, 246);
+        text-align: center;
+
+        .desktop({
+            padding: 2rem 12.5%;
+        });
+
+        .news-item {
+            font-size: 2rem;
+        }
+    }
+}
