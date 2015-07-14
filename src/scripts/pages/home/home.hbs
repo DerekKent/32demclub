@@ -1,54 +1,56 @@
 <style scoped>@import url(/scripts/pages/home/home.css);</style>
 <div class="home-page">
-    <div class="join">
+    <section class="join">
         <div class="count-me-in">
-            <span class="join-us">Count Me In:</span>
+            <h1 class="join-us">Count Me In</h1><span>: </span>
         </div>
         <div class="join-form">
-            <input placeholder="EMAIL" type="email" name="email" required>
-            <input placeholder="ZIP" type="text" name="zip" maxlength="5" pattern="[0-9]*" required>
-            <input type="submit" value="ADD MY NAME">
+            <form>
+                <input placeholder="EMAIL" type="email" name="email" required aria-label="E-mail">
+                <input placeholder="ZIP" type="text" name="zip" maxlength="5" pattern="[0-9]*" required aria-label="Zip Code">
+                <input type="submit" value="Add My Name">
+            </form>
         </div>
-    </div>
+    </section>
 
-    <div class="events">
+    <section class="events">
         <div class="event-icon">
             <i class="icon icon-calendar"></i>
-            <span>Event: </span>
+            <h1>Event</h1><span>: </span>
         </div>
 
         <div class="event-message">
             <span>Join us on September 17th for our next club meeting (no meeting this July or August)</span>
         </div>
-    </div>
+    </section>
 
-    <div class="info">
+    <main class="info">
         <div class="header">
             <h1>Make a Difference</h1>
-            <p>Help us make Anne Arundel County even better</p>
+            <h2>Help us make Anne Arundel County even better</h2>
         </div>
 
         <div class="boxes">
             <div class="box">
                 <i class="icon icon-comments"></i>
-                <h2>Connect</h2>
+                <h3>Connect</h3>
                 <p>Sign up for our monthly newsletter to stay up-to-date with local changes.</p>
-                <a href="#" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
+                <a href="/news" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
             </div>
 
             <div class="box">
                 <i class="icon icon-users"></i>
-                <h2>Meetup</h2>
+                <h3>Meetup</h3>
                 <p>Join us at the Ferndale Fire Department on {{meetingDate}} at 7pm.</p>
-                <a href="#" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
+                <a href="/meetup" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
             </div>
 
             <div class="box">
                 <i class="icon icon-bolt"></i>
-                <h2>Take Action</h2>
+                <h3>Take Action</h3>
                 <p>Volunteer to make a positive difference in your community today.</p>
-                <a href="#" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
+                <a href="/volunteer" class="btn"><span class="text">More Info</span> <span class="arrow"><i class="icon icon-angle-right"></i></span></a>
             </div>
         </div>
-    </div>
+    </main>
 </div>
