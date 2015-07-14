@@ -1,16 +1,18 @@
 <style scoped>@import url(/scripts/pages/home/home.css);</style>
 <div class="home-page">
     <section class="join">
-        <div class="count-me-in">
-            <h1 class="join-us">Count Me In</h1><span>: </span>
-        </div>
-        <div class="join-form">
-            <form>
-                <input placeholder="EMAIL" type="email" name="email" required aria-label="E-mail">
-                <input placeholder="ZIP" type="text" name="zip" maxlength="5" pattern="[0-9]*" required aria-label="Zip Code">
-                <input type="submit" value="Add My Name">
-            </form>
-        </div>
+        <form>
+            <div role="group" aria-label="Subscribe to e-mail updates">
+                <div class="count-me-in">
+                    <h1 class="join-us">Count Me In</h1><span>: </span>
+                </div>
+                <div class="join-form">
+                    <input placeholder="EMAIL" type="email" name="email" required aria-label="E-mail">
+                    <input placeholder="ZIP" type="text" name="zip" maxlength="5" pattern="[0-9]*" required aria-label="Zip Code">
+                    <input type="submit" value="Add My Name">
+                </div>
+            </div>
+        </form>
     </section>
 
     <section class="events">

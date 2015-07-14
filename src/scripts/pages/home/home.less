@@ -6,93 +6,96 @@
     z-index: -3;
 
     .join {
-        padding: 2rem;
         background-color: rgb(15, 36, 70);
         text-transform: uppercase;
         color: white;
 
-        .flex-display();
-        .align-items(center);
-        .justify-content(space-around);
-        .flex-wrap(wrap);
-        text-align: center;
-
-        .desktop({
-            .flex-wrap(nowrap);
-        });
-
-        .count-me-in {
-            .flex(1, 0, auto);
-            font-size: 2.4rem;
-
-            h1 {
-                display: inline;
-                font-size: inherit;
-            }
-        }
-
-        .join-form {
-            .flex(1, 1, auto);
+        > form > div {
+            padding: 2rem;
+            .flex-display();
+            .align-items(center);
+            .justify-content(space-around);
             .flex-wrap(wrap);
+            text-align: center;
+            border: none;
 
-            .phone({
-                .flex-display();
-                .flex(1, 1, auto);
-                .align-items(center);
-                .flex-wrap(wrap);
-                .justify-content(space-around);
+            .desktop({
+                .flex-wrap(nowrap);
             });
 
-            input {
-                margin-left: 2rem;
+            .count-me-in {
+                .flex(1, 0, auto);
+                font-size: 2.4rem;
 
-                .phone({
-                    margin: 0.5rem 0;
-                    .flex(1, 0, 90%);
-                });
-
-                .tablet({
-                    margin-top: 0.5rem;
-                    margin-bottom: 0.5rem;
-                });
-
-                // default input values?
-                height: 3rem;
-                padding: 0.5rem 1rem;
-                font-size: 1.2rem;
-                color: rgb(85, 85, 85);
-                background-color: rgb(255, 255, 255);
-                border: 0.1rem solid rgb(204, 204, 204);
-                border-radius: 0;
-                box-shadow: inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.075);
-                -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-                transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
-
-                &:focus {
-                    border-color: rgb(102, 175, 233);
-                    outline: 0;
+                h1 {
+                    display: inline;
+                    font-size: inherit;
                 }
             }
 
-            input[type="submit"] {
-                font-family: 'Montserrat', sans-serif;
-                background-color: #fff;
-                color: @red-32;
-                border: 0.2rem solid @red-32;
-                transition: background-color .15s ease, color .15s ease;
-                font-weight: 700;
-                height: 3rem;
-                line-height: 1.5rem;
-                font-size: 1.4rem;
-                text-transform: uppercase;
+            .join-form {
+                .flex(1, 1, auto);
+                .flex-wrap(wrap);
 
-                &:hover {
-                    background-color: @red-32;
-                    color: white;
+                .phone({
+                    .flex-display();
+                    .flex(1, 1, auto);
+                    .align-items(center);
+                    .flex-wrap(wrap);
+                    .justify-content(space-around);
+                });
+
+                input {
+                    margin-left: 2rem;
+
+                    .phone({
+                        margin: 0.5rem 0;
+                        .flex(1, 0, 90%);
+                    });
+
+                    .tablet({
+                        margin-top: 0.5rem;
+                        margin-bottom: 0.5rem;
+                    });
+
+                    // default input values?
+                    height: 3rem;
+                    padding: 0.5rem 1rem;
+                    font-size: 1.2rem;
+                    color: rgb(85, 85, 85);
+                    background-color: rgb(255, 255, 255);
+                    border: 0.1rem solid rgb(204, 204, 204);
+                    border-radius: 0;
+                    box-shadow: inset 0 0.1rem 0.1rem rgba(0, 0, 0, 0.075);
+                    -webkit-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+                    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+
+                    &:focus {
+                        border-color: rgb(102, 175, 233);
+                        outline: 0;
+                    }
                 }
 
-                &:focus {
-                    outline: 0;
+                input[type="submit"] {
+                    font-family: 'Montserrat', sans-serif;
+                    background-color: #fff;
+                    color: @red-32;
+                    border: 0.2rem solid @red-32;
+                    transition: background-color .15s ease, color .15s ease;
+                    font-weight: 700;
+                    height: 3rem;
+                    line-height: 1.5rem;
+                    font-size: 1.4rem;
+                    text-transform: uppercase;
+
+                    &:hover {
+                        background-color: @red-32;
+                        color: white;
+                    }
+
+                    &:focus {
+                        outline: 0;
+                    }
                 }
             }
         }
