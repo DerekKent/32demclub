@@ -12,6 +12,7 @@ class App {
         this.view = appView;
 
         Backbone.history.start({
+            hashChange:false,
             pushState: true
         });
 
@@ -34,7 +35,7 @@ class App {
 
             let href = el.getAttribute('href');
 
-            if (!href || e.defaultPrevented || MAILTO.test(href)) {
+            if (!href || href.charAt(0) === '#' || e.defaultPrevented || MAILTO.test(href)) {
                 return;
             }
 
