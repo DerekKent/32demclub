@@ -45,11 +45,27 @@
         });
 
         > a {
+            background-image: url(/images/md32dems-home.png);
+            background-size: 192px 64px;
+            background-position: 0 0.8rem;
+            background-repeat: no-repeat;
             line-height: 0.8rem;
+
+            &:focus > img,
+            &:hover > img {
+                opacity: 0;
+            }
 
             > img {
                 margin: 0.8rem 12rem 0.8rem 0;
+                background-color: white;
+                transition: opacity .3s linear;
                 .user-select(none);
+
+                &:focus,
+                &:hover {
+                    opacity: 0;
+                }
             }
         }
 
