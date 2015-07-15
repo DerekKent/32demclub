@@ -9,7 +9,8 @@ export default class Header extends BaseView {
 
             events: {
                 'click .expand-nav': 'toggleNavMenu',
-                'click #skiptocontent a': 'skipToContent'
+                'click #skiptocontent a': 'skipToContent',
+                'click nav > a': 'blurLogo'
             }
         });
     }
@@ -24,6 +25,10 @@ export default class Header extends BaseView {
         if (this.el) {
             this.el.querySelector('.header').style.maxHeight = '80px';
         }
+    }
+
+    blurLogo (e) {
+        e.delegateTarget.blur();
     }
 
     toggleNavMenu (e) {
