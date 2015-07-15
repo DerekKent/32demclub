@@ -8,7 +8,8 @@ export default class Header extends BaseView {
             el: '#header',
 
             events: {
-                'click .expand-nav': 'toggleNavMenu'
+                'click .expand-nav': 'toggleNavMenu',
+                'click #skiptocontent a': 'skipToContent'
             }
         });
     }
@@ -41,4 +42,26 @@ export default class Header extends BaseView {
             button.classList.add('active');
         }
     }
+
+    skipToContent (e) {
+        let el = document.getElementById('maincontent');
+
+        if (el) {
+            if (!/^(?:a|select|input|button|textarea)$/i.test(el.tagName)) {
+                el.tabIndex = -1;
+
+                function removeTabIndex () {
+                    this.removeAttribute('tabindex');
+                    this.removeEventListener('blur', removeTabIndex, false);
+                    this.removeEventListener('focusout', removeTabIndex, false);
+                }
+
+                el.addEventListener('blur', removeTabIndex, false);
+                el.addEventListener('focusout', removeTabIndex, false);
+            }
+
+            el.focus();
+        }
+    }
+
 }
