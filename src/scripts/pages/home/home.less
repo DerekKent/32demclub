@@ -88,12 +88,10 @@
                     font-size: 1.4rem;
                     text-transform: uppercase;
 
-                    &:hover {
+                    &:hover,
+                    &:focus {
                         background-color: @red-32;
                         color: white;
-                    }
-
-                    &:focus {
                         outline: 0;
                     }
                 }
@@ -200,7 +198,8 @@
                     margin-left: 0;
                 });
 
-                &:hover > .icon {
+                &:hover > .icon,
+                &:focus > .icon {
                     color: @red-32;
                 }
 
@@ -232,7 +231,8 @@
                     height: 5rem;
                     transition: background 0.5s ease-in-out, border-color 0.5s ease-in-out;
 
-                    &:hover .arrow {
+                    &:hover .arrow,
+                    &:focus .arrow {
                         margin-left: 1rem;
                         margin-right: -0.5rem;
                     }
@@ -275,12 +275,14 @@
         max-width: 20rem;
     }
 
-    .info .box .btn:hover {
+    .info .box .btn:hover,
+    .info .box .btn:focus {
         background: @red-32-dark;
         border-color: @red-32-dark;
     }
 
-    .info .box .btn:hover::after {
+    .info .box .btn:hover::after,
+    .info .box .btn:focus::after {
         -webkit-transform: rotate(0deg);
         transform: rotate(0deg);
     }
@@ -301,7 +303,8 @@
         transition: margin 0.25s linear;
     }
 
-    a.icon:hover .arrow {
+    a.icon:hover .arrow,
+    a.icon:focus .arrow {
         margin-left: 1rem;
         margin-right: -0.5rem;
     }
@@ -341,7 +344,8 @@
             max-width: 20rem;
         }
 
-        &:hover {
+        &:hover,
+        &:focus {
             background: rgb(1, 112, 208);
 
             &::after {
