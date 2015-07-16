@@ -160,6 +160,11 @@ small {
     font-size: floor((100% * @font-size-small / @font-size-base));
 }
 
+h1, h2, h3, h4, h5, h6, p, span, small {
+    // Prevent WebKit font flicker during re-render
+    -webkit-font-smoothing: subpixel-antialiased;
+}
+
 input::-webkit-input-placeholder { color: rgb(89, 89, 89); }
 input:-ms-input-placeholder { color: rgb(89, 89, 89); }
 input::-moz-placeholder { color: rgb(89, 89, 89); }
@@ -176,10 +181,14 @@ input::placeholder { color: rgb(89, 89, 89); }
     border: 0;
 }
 
-#maincontent:focus {
-    animation-duration: 1s;
-    animation-name: pulse;
-    animation-timing-function: ease-in;
+#maincontent {
+    outline: none;
+
+    &:focus {
+        animation-duration: 1s;
+        animation-name: pulse;
+        animation-timing-function: ease-in;
+    }
 }
 
 @keyframes pulse {
