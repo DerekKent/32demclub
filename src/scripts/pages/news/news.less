@@ -3,7 +3,7 @@
 
 .news-page {
     font-size: 1.6em;
-    
+
     ul {
         padding: 0;
         list-style-type: none;
@@ -12,7 +12,87 @@
     .club-news {
         padding: 2rem;
         background-color: rgb(246, 246, 246);
+        width: 100%;
         text-align: center;
+
+        time {
+            display: block;
+        }
+
+        .club-news-time time {
+            color: #545454;
+            margin-bottom: 80px;
+        }
+
+        section {
+            position: relative;
+            margin: 2rem 1rem;
+            padding: 3rem;
+            background-color: white;
+            box-shadow: 0 0.1rem 0.2rem rgba(0, 0, 0, 0.1);
+
+            time {
+                padding: 10px;
+            }
+
+            h1, h2 {
+                text-align: center;
+            }
+
+            .subtitle {
+                font-style: italic;
+                color: #545454;
+            }
+
+            p {
+                text-align: left;
+            }
+
+            .address span {
+                display: block;
+                text-align: left;
+            }
+
+            .reminder-left {
+                p, .address > span:first-child  {
+                    font-size: 1.1em;
+                }
+            }
+
+            .menu {
+                span {
+                    display: block;
+                    text-align: center;
+                }
+
+                .menu-title {
+                    font-size: 1.1em;
+                }
+
+                .menu-subtitle {
+                    font-size: 0.9em;
+                    margin-bottom: 20px;
+                }
+            }
+
+            .section-body {
+                margin-top: 50px;
+                display: block;
+            }
+        }
+
+        .reminder .section-body {
+            align-items: center;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            flex-direction: row;
+            display: flex;
+
+            .divider {
+                height: 130px;
+                border-left: 1px solid #545454;
+            }
+        }
 
         .desktop({
             padding: 2rem 12.5%;
